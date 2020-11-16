@@ -15,14 +15,5 @@ class MainActivity : AppCompatActivity() {
 
         // OK
         findViewById<Button>(R.id.button).setOnClickListener { findViewById<TextView>(R.id.text).setText("Ok") }
-        /*
-        findViewById(R.id.select_city_button_ok).setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                returnMain();
-
-            }
-        }));
-         */
     }
 }
