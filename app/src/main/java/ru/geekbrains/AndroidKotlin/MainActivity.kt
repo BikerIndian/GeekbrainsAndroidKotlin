@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +15,6 @@ class MainActivity : AppCompatActivity() {
 
 
         // OK
-        findViewById<Button>(R.id.button).setOnClickListener { findViewById<TextView>(R.id.text).setText("Ok") }
+        button.setOnClickListener { text.text = "Ok" }
     }
 }
