@@ -1,10 +1,8 @@
 package ru.geekbrains.AndroidKotlin.ui.main
 
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.AndroidKotlin.R
 import ru.geekbrains.AndroidKotlin.data.Note
@@ -44,26 +42,6 @@ class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.setBackgroundColor(note.color)
     }
 }
-
-/*
-class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-   private val title =
-
-
-   private val body = itemView.findViewById<TextView>(R.id.bodyId)
-
-   fun bind(note: ContactsContract.CommonDataKinds.Note) {
-
-
-       title.text = note.title
-       body.text = note.note
-       itemView.setBackgroundColor(note.color)
-
-
-   }
-
-}
-   */
 
 
 

@@ -32,7 +32,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             when (it) {
                 is MainViewState.Value -> {
                     adapter.notes = it.notes
-                   // adapter.getNotesList().submitList(it.notes)
                 }
                 MainViewState.EMPTY -> Unit
             }
