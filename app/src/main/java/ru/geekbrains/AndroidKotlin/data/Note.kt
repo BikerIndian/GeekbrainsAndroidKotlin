@@ -1,4 +1,4 @@
-package com.supercat.notes.data
+package ru.geekbrains.AndroidKotlin.data
 
 data class Note(
     val groupName: String,

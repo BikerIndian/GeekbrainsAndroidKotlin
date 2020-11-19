@@ -1,5 +1,8 @@
 package com.supercat.notes.data
 
+import ru.geekbrains.AndroidKotlin.data.Note
+import ru.geekbrains.AndroidKotlin.data.NotesRepository
+
 object NotesRepositoryImpl : NotesRepository {
     private val notes: List<Note> = listOf(
             Note(

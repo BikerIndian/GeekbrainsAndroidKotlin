@@ -1,4 +1,4 @@
-package com.supercat.notes.data
+package ru.geekbrains.AndroidKotlin.data
 
 interface NotesRepository {
     fun getAllNotes(): List<Note>
