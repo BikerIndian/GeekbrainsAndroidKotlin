@@ -2,6 +2,7 @@ package ru.geekbrains.AndroidKotlin.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import ru.geekbrains.AndroidKotlin.R
 
 class MainActivity : AppCompatActivity() {
@@ -9,5 +10,13 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    fun navigateTo(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction
+                .add(R.id.fragment_container_view, fragment)
+                .addToBackStack("notes")
+                .commit()
     }
 }

@@ -19,13 +19,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         )
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = MainAdapter()
 
         mainRecycler.adapter = adapter
-
 
         // build add jvmTarget = '1.8'
         viewMode.viewState().observe(viewLifecycleOwner) {
@@ -37,6 +35,15 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
         }
 
+        // обработка нажатия на Floating Action Button
+        fab.setOnClickListener {
+            navigateToCreation()
+        }
+    }
+
+    // Переход на фрагмент редактирования
+    private fun navigateToCreation() {
+        (requireActivity() as MainActivity).navigateTo(AddNoteFragment.create(null))
     }
 
 }
