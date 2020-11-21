@@ -12,9 +12,9 @@ import ru.geekbrains.AndroidKotlin.presentation.main.MainViewModel
 import ru.geekbrains.AndroidKotlin.presentation.main.MainViewState
 
 class MainFragment : Fragment(R.layout.main_fragment) {
-    lateinit var viewModel: MainViewModel
 
-    private val viewMode by lazy(LazyThreadSafetyMode.NONE) {
+    // Подключаем  ViewModel
+    private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
         ViewModelProvider(this).get(
                 MainViewModel::class.java
         )
@@ -33,7 +33,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         mainRecycler.adapter = adapter
 
         // build add jvmTarget = '1.8'
-        viewMode.viewState().observe(viewLifecycleOwner) {
+        viewModel.viewState().observe(viewLifecycleOwner) {
             when (it) {
                 is MainViewState.Value -> {
                     adapter.notes = it.notes

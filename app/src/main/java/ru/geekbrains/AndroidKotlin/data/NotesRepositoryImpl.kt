@@ -59,4 +59,8 @@ object NotesRepositoryImpl : NotesRepository {
     override fun getAllNotes(): List<Note> {
         return notes
     }
+
+    override fun addOrReplaceNote(newNote: Note) {
+      //
+    }
 }

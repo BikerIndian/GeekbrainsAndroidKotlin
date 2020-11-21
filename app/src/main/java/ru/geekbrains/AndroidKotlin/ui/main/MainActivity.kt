@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     fun navigateTo(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction
-                .add(R.id.fragment_container_view, fragment)
+                .replace(R.id.fragment_container_view, fragment)
                 .addToBackStack("notes")
                 .commit()
     }
