@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.main_fragment.*
 import ru.geekbrains.AndroidKotlin.R
+import ru.geekbrains.AndroidKotlin.data.Note
 import ru.geekbrains.AndroidKotlin.presentation.main.MainViewModel
 import ru.geekbrains.AndroidKotlin.presentation.main.MainViewState
 
@@ -21,7 +22,13 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = MainAdapter()
+
+        // отправка адаптеру ClickListener для редактирования заметки
+        val  adapter = MainAdapter( object : MainAdapter.OnItemClickListener {
+            override fun onItemClick (note: Note ) {
+                navigateToNote(note)
+            }
+        })
 
         mainRecycler.adapter = adapter
 
@@ -39,6 +46,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         fab.setOnClickListener {
             navigateToCreation()
         }
+    }
+
+    // Переход на фрагмент редактирования и передачей данных
+    private fun navigateToNote(note: Note) {
+        (requireActivity() as MainActivity).navigateTo(AddNoteFragment.create(note))
     }
 
     // Переход на фрагмент редактирования
