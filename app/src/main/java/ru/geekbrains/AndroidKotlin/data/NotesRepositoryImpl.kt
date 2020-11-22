@@ -3,16 +3,11 @@ package com.supercat.notes.data
 import ru.geekbrains.AndroidKotlin.data.Color
 import ru.geekbrains.AndroidKotlin.data.Note
 import ru.geekbrains.AndroidKotlin.data.NotesRepository
-import kotlin.random.Random
 
 object NotesRepositoryImpl : NotesRepository {
 
     // Генератор id
-    val noteId: Long get() =  Random(0).nextLong()
-
-    fun observeNotes():  MutableList<Note> {
-        return notes
-    }
+    val noteId: Long get() = (0 until Long.MAX_VALUE).random().toLong()
 
     private val notes: MutableList<Note> = mutableListOf(
             Note(
@@ -87,6 +82,7 @@ object NotesRepositoryImpl : NotesRepository {
         notes.find { it.id == newNote.id }?.let {
             // если изменений не было то возврат
             if (it == newNote) return
+            delete(it)
         }
         insert(newNote)
     }
