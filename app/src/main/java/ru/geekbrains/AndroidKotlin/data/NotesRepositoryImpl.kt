@@ -1,8 +1,6 @@
 package com.supercat.notes.data
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import ru.geekbrains.AndroidKotlin.data.Color
 import ru.geekbrains.AndroidKotlin.data.Note
 import ru.geekbrains.AndroidKotlin.data.NotesRepository
 import kotlin.random.Random
@@ -23,7 +21,7 @@ object NotesRepositoryImpl : NotesRepository {
                     title = "Android Data Binding",
                     note = "buttonId.setOnClickListener { textId.text = \"Ok\" }",
                     url = "https://startandroid.ru/ru/courses/architecture-components/27-course/architecture-components/551-urok-18-data-binding-osnovy.html",
-                    color = 0xfff06292.toInt()
+                    color = Color.BLUE
             ),
             Note(
                     id=2,
@@ -31,7 +29,7 @@ object NotesRepositoryImpl : NotesRepository {
                     title = "Аннотация @JvmOverloads",
                     note = "Аннотация информирует компилятор, что следует создать конструктор на основе предыдущего с дополнительным параметром с значением по умолчанию.",
                     url = "http://developer.alexanderklimov.ru/android/kotlin/jvmoverloads.php",
-                    color = 0xff9575cd.toInt()
+                    color = Color.GREEN
             ),
             Note(
                     id=3,
@@ -39,7 +37,7 @@ object NotesRepositoryImpl : NotesRepository {
                     title = "tools:listitem / listheader / listfooter",
                     note = "настроить внешний вид компонентов на основе AdapterView - ListView, GridView, ExpandableListView >> tools:listitem=\"@layout/item_note\"",
                     url = "http://developer.alexanderklimov.ru/android/studio/tools.php",
-                    color = 0xff64b5f6.toInt()
+                    color = Color.PINK
             ),
             Note(
                     id=4,
@@ -47,7 +45,7 @@ object NotesRepositoryImpl : NotesRepository {
                     title = "Моя 4 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
                     url = "",
-                    color = 0xff4db6ac.toInt()
+                    color = Color.RED
             ),
             Note(
                     id=5,
@@ -55,7 +53,7 @@ object NotesRepositoryImpl : NotesRepository {
                     title = "Моя 5 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
                     url = "",
-                    color = 0xffb2ff59.toInt()
+                    color = Color.VIOLET
             ),
             Note(
                     id=6,
@@ -63,7 +61,7 @@ object NotesRepositoryImpl : NotesRepository {
                     title = "Моя 6 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
                     url = "",
-                    color = 0xffffeb3b.toInt()
+                    color = Color.YELLOW
             ),
             Note(
                     id=7,
@@ -71,7 +69,7 @@ object NotesRepositoryImpl : NotesRepository {
                     title = "Моя 7 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
                     url = "",
-                    color = 0xffff6e40.toInt()
+                    color = Color.WHITE
             )
     )
 

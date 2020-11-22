@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.AndroidKotlin.R
 import ru.geekbrains.AndroidKotlin.data.Note
 import kotlinx.android.synthetic.main.item_note.view.*
+import ru.geekbrains.AndroidKotlin.data.mapToColor
 
 // RecyclerView
 class MainAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MainAdapter.NoteViewHolder>() {
@@ -34,7 +35,7 @@ class MainAdapter(private val onItemClickListener: OnItemClickListener) : Recycl
         fun bind(note: Note) {
             itemView.titleId.text = note.title
             itemView.bodyId.text = note.note
-            itemView.setBackgroundColor(note.color)
+            itemView.setBackgroundColor(note.color.mapToColor(itemView.context))
             itemView.setOnClickListener { onItemClickListener.onItemClick(note) } // редактирования заметки
         }
     }
