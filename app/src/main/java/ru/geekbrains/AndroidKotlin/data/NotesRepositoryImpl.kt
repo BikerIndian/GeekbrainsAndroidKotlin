@@ -1,11 +1,24 @@
 package com.supercat.notes.data
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import ru.geekbrains.AndroidKotlin.data.Note
 import ru.geekbrains.AndroidKotlin.data.NotesRepository
+import kotlin.random.Random
 
 object NotesRepositoryImpl : NotesRepository {
-    private val notes: List<Note> = listOf(
+
+    // Генератор id
+    val noteId: Long get() =  Random(0).nextLong()
+
+    fun observeNotes():  MutableList<Note> {
+        return notes
+    }
+
+    private val notes: MutableList<Note> = mutableListOf(
             Note(
+                    id=1,
                     groupName = "Kotlin Code",
                     title = "Android Data Binding",
                     note = "buttonId.setOnClickListener { textId.text = \"Ok\" }",
@@ -13,6 +26,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = 0xfff06292.toInt()
             ),
             Note(
+                    id=2,
                     groupName = "Kotlin Code",
                     title = "Аннотация @JvmOverloads",
                     note = "Аннотация информирует компилятор, что следует создать конструктор на основе предыдущего с дополнительным параметром с значением по умолчанию.",
@@ -20,6 +34,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = 0xff9575cd.toInt()
             ),
             Note(
+                    id=3,
                     groupName = "XML",
                     title = "tools:listitem / listheader / listfooter",
                     note = "настроить внешний вид компонентов на основе AdapterView - ListView, GridView, ExpandableListView >> tools:listitem=\"@layout/item_note\"",
@@ -27,6 +42,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = 0xff64b5f6.toInt()
             ),
             Note(
+                    id=4,
                     groupName = "",
                     title = "Моя 4 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
@@ -34,6 +50,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = 0xff4db6ac.toInt()
             ),
             Note(
+                    id=5,
                     groupName = "",
                     title = "Моя 5 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
@@ -41,6 +58,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = 0xffb2ff59.toInt()
             ),
             Note(
+                    id=6,
                     groupName = "",
                     title = "Моя 6 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
@@ -48,6 +66,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = 0xffffeb3b.toInt()
             ),
             Note(
+                    id=7,
                     groupName = "",
                     title = "Моя 7 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
@@ -60,7 +79,21 @@ object NotesRepositoryImpl : NotesRepository {
         return notes
     }
 
-    override fun addOrReplaceNote(newNote: Note) {
-      //
+    override fun insert(note: Note) {
+        // добавить в начало
+        notes.add(0,note)
+    }
+
+    override fun update(newNote: Note) {
+
+        notes.find { it.id == newNote.id }?.let {
+            // если изменений не было то возврат
+            if (it == newNote) return
+        }
+        insert(newNote)
+    }
+
+    override fun delete(note: Note) {
+        notes.remove(note)
     }
 }

@@ -1,6 +1,5 @@
 package ru.geekbrains.AndroidKotlin.presentation.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.supercat.notes.data.NotesRepositoryImpl
 import ru.geekbrains.AndroidKotlin.data.Note
@@ -19,7 +18,7 @@ class NoteViewModel(var note: Note?) : ViewModel() {
         super.onCleared()
 
         note?.let {
-            NotesRepositoryImpl.addOrReplaceNote(it)
+            NotesRepositoryImpl.update(it)
         }
     }
 
