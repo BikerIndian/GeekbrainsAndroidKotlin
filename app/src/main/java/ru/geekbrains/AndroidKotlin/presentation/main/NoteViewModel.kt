@@ -14,15 +14,22 @@ class NoteViewModel(var note: Note?) : ViewModel() {
         note = (note ?: generateNote()).copy(title = text)
     }
 
-    override fun onCleared() {
-        super.onCleared()
 
+    private fun generateNote(): Note {
+        return Note()
+    }
+
+    // обновить / изменить заметку
+    fun update(){
         note?.let {
             NotesRepositoryImpl.update(it)
         }
     }
 
-    private fun generateNote(): Note {
-        return Note()
+    // удалить заметку
+    fun delete(){
+        note?.let {
+            NotesRepositoryImpl.delete(it)
+        }
     }
 }

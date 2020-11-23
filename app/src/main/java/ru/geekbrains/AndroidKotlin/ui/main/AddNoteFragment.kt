@@ -45,6 +45,7 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
         super.onViewCreated(view, savedInstanceState)
 
         setOkButton()
+        setDeleteButton()
 
         // Заполняем поля данными
         viewModel.note?.let {
@@ -64,6 +65,15 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
     // Возврат обратно
     private fun setOkButton() {
         ok_id.setOnClickListener {
+            viewModel.update()
+            getActivity()?.onBackPressed()
+        }
+    }
+
+    // Возврат обратно
+    private fun setDeleteButton() {
+        delete_id.setOnClickListener {
+            viewModel.delete()
             getActivity()?.onBackPressed()
         }
     }

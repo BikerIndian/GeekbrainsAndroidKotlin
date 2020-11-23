@@ -11,7 +11,7 @@ object NotesRepositoryImpl : NotesRepository {
 
     private val notes: MutableList<Note> = mutableListOf(
             Note(
-                    id=1,
+                    id = 1,
                     groupName = "Kotlin Code",
                     title = "Android Data Binding",
                     note = "buttonId.setOnClickListener { textId.text = \"Ok\" }",
@@ -19,7 +19,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = Color.BLUE
             ),
             Note(
-                    id=2,
+                    id = 2,
                     groupName = "Kotlin Code",
                     title = "Аннотация @JvmOverloads",
                     note = "Аннотация информирует компилятор, что следует создать конструктор на основе предыдущего с дополнительным параметром с значением по умолчанию.",
@@ -27,7 +27,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = Color.GREEN
             ),
             Note(
-                    id=3,
+                    id = 3,
                     groupName = "XML",
                     title = "tools:listitem / listheader / listfooter",
                     note = "настроить внешний вид компонентов на основе AdapterView - ListView, GridView, ExpandableListView >> tools:listitem=\"@layout/item_note\"",
@@ -35,7 +35,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = Color.PINK
             ),
             Note(
-                    id=4,
+                    id = 4,
                     groupName = "",
                     title = "Моя 4 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
@@ -43,7 +43,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = Color.RED
             ),
             Note(
-                    id=5,
+                    id = 5,
                     groupName = "",
                     title = "Моя 5 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
@@ -51,7 +51,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = Color.VIOLET
             ),
             Note(
-                    id=6,
+                    id = 6,
                     groupName = "",
                     title = "Моя 6 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
@@ -59,7 +59,7 @@ object NotesRepositoryImpl : NotesRepository {
                     color = Color.YELLOW
             ),
             Note(
-                    id=7,
+                    id = 7,
                     groupName = "",
                     title = "Моя 7 заметка",
                     note = "Kotlin очень краткий, но при этом выразительный язык",
@@ -74,7 +74,7 @@ object NotesRepositoryImpl : NotesRepository {
 
     override fun insert(note: Note) {
         // добавить в начало
-        notes.add(0,note)
+        notes.add(0, note)
     }
 
     override fun update(newNote: Note) {
@@ -82,12 +82,14 @@ object NotesRepositoryImpl : NotesRepository {
         notes.find { it.id == newNote.id }?.let {
             // если изменений не было то возврат
             if (it == newNote) return
-            delete(it)
+            notes.remove(it)
         }
         insert(newNote)
     }
 
     override fun delete(note: Note) {
-        notes.remove(note)
+        notes.find { it.id == note.id }?.let {
+            notes.remove(it)
+        }
     }
 }
