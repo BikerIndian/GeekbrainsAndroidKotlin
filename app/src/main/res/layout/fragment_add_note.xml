@@ -37,16 +37,21 @@
                 android:id="@+id/titleEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black" />
+                android:background="@color/color_green"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/bodyEt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="466dp"
             android:layout_marginTop="16dp"
-            android:background="@null"
-            android:hint="Текст заметки" />
+            android:background="@color/color_yellow"
+            android:fontFamily="sans-serif-black"
+            android:gravity="top|left"
+            android:hint="Текст заметки"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
