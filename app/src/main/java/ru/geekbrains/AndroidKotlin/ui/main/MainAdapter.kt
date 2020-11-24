@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.AndroidKotlin.R
 import ru.geekbrains.AndroidKotlin.data.Note
 import kotlinx.android.synthetic.main.item_note.view.*
+import ru.geekbrains.AndroidKotlin.data.mapToColor
 
 // RecyclerView
-class MainAdapter : RecyclerView.Adapter<NoteViewHolder>() {
+class MainAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MainAdapter.NoteViewHolder>() {
     var notes: List<Note> = listOf()
         set(value) {
             field = value
@@ -29,18 +30,21 @@ class MainAdapter : RecyclerView.Adapter<NoteViewHolder>() {
 
         holder.bind(notes[position])
     }
-    fun getNotesList(): List<Note> {
-       return this.notes
-    }
-}
 
-class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    fun bind(note: Note) {
-        itemView.titleId.text = note.title
-        itemView.bodyId.text = note.note
-        itemView.setBackgroundColor(note.color)
+    inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(note: Note) {
+            itemView.titleId.text = note.title
+            itemView.bodyId.text = note.note
+            itemView.setBackgroundColor(note.color.mapToColor(itemView.context))
+            itemView.setOnClickListener { onItemClickListener.onItemClick(note) } // редактирования заметки
+        }
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(note: Note)
+    }
+
+
 }
 
 
