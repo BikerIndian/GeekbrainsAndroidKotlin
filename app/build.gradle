@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "ru.geekbrains.AndroidKotlin"
+        applicationId "net.svishch.android.note"
         minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
