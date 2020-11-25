@@ -69,7 +69,17 @@ class FireBaseDb : RemoteDataProvider {
     }
 
     override fun delete(note: Note): LiveData<ResultFireBaseDb> {
-        TODO("Not yet implemented")
+        val result = MutableLiveData<ResultFireBaseDb>()
+        notesReference.document(note.id.toString())
+                .delete().addOnFailureListener {
+                    object : OnFailureListener {
+                        override fun onFailure(p0: Exception) {
+                            Log.d(TAG, "update error: $note , message: ${p0.message} ")
+                            result.value = ResultFireBaseDb.Error(p0)
+                        }
+                    }
+                }
+        return result
     }
 
 

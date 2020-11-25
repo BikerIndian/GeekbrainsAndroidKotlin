@@ -10,7 +10,7 @@ object NotesRepositoryImpl : NotesRepository {
 
     // Генератор id
     val noteId: Long get() = (0 until Long.MAX_VALUE).random().toLong()
-
+    val fireBaseDb =  FireBaseDb()
     private val notes: MutableList<Note> = mutableListOf(
             Note(
                     id = 1,
@@ -77,22 +77,14 @@ object NotesRepositoryImpl : NotesRepository {
     override fun insert(note: Note) {
         // добавить в начало
         //notes.add(0, note)
-        FireBaseDb().insert(note)
+        fireBaseDb.insert(note)
     }
 
     override fun update(newNote: Note) {
-
-        notes.find { it.id == newNote.id }?.let {
-            // если изменений не было то возврат
-            if (it == newNote) return
-            notes.remove(it)
-        }
-        insert(newNote)
+        fireBaseDb.update(newNote)
     }
 
     override fun delete(note: Note) {
-        notes.find { it.id == note.id }?.let {
-            notes.remove(it)
-        }
+        fireBaseDb.delete(note)
     }
 }
