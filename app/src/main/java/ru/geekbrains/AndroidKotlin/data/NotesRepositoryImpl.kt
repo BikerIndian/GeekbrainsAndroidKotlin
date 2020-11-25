@@ -1,8 +1,10 @@
 package com.supercat.notes.data
 
+import android.util.Log
 import ru.geekbrains.AndroidKotlin.data.Color
 import ru.geekbrains.AndroidKotlin.data.Note
 import ru.geekbrains.AndroidKotlin.data.NotesRepository
+import ru.geekbrains.AndroidKotlin.data.db.FireBaseDb
 
 object NotesRepositoryImpl : NotesRepository {
 
@@ -74,7 +76,8 @@ object NotesRepositoryImpl : NotesRepository {
 
     override fun insert(note: Note) {
         // добавить в начало
-        notes.add(0, note)
+        //notes.add(0, note)
+        FireBaseDb().insert(note)
     }
 
     override fun update(newNote: Note) {
