@@ -9,13 +9,16 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "net.svishch.android.note"
+        applicationId "net.svishch.android.crasynote"
         minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //разрешим multidex
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -50,6 +53,13 @@ dependencies {
     //noinspection GradleDependency
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
 
+    //Firebase Firestore
+    implementation 'com.google.firebase:firebase-core:18.0.0'
+    implementation 'com.google.firebase:firebase-firestore:22.0.0'
+
+    // поддержка MultiDex для решения проблемы с превышением лимита
+    // количества методов для .dex -файлов. Чтобы
+    implementation 'com.android.support:multidex:1.0.3'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
@@ -63,3 +73,6 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+// Google service
+apply plugin: 'com.google.gms.google-services'

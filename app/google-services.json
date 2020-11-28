@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "482507819319",
+    "firebase_url": "https://crasy-note.firebaseio.com",
+    "project_id": "crasy-note",
+    "storage_bucket": "crasy-note.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482507819319:android:f8c6194a9990ed980232b2",
+        "android_client_info": {
+          "package_name": "net.svishch.android.crasynote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482507819319-teujk4lo6nktrqmbr0l73id9d5eu5137.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPMNAwrEJS24tKVxtjJJOOYr3QO6sfEkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482507819319-teujk4lo6nktrqmbr0l73id9d5eu5137.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
