@@ -3,6 +3,7 @@ package ru.geekbrains.AndroidKotlin.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ru.geekbrains.AndroidKotlin.R
 import ru.geekbrains.AndroidKotlin.data.Note
@@ -33,9 +34,12 @@ class MainAdapter(private val onItemClickListener: OnItemClickListener) : Recycl
 
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(note: Note) {
+
             itemView.titleId.text = note.title
             itemView.bodyId.text = note.note
-            itemView.setBackgroundColor(note.color.mapToColor(itemView.context))
+            itemView.note_layoutId.background.setTint(note.color.mapToColor(itemView.context))
+            //itemView.note_layoutId.backgroundTintList(ContextCompat.getColorStateList(itemView.context, note.color.mapToColor(itemView.context)));
+            //itemView.note_layoutId.backgroundTintList(note.color.mapToColor(itemView.context))
             itemView.setOnClickListener { onItemClickListener.onItemClick(note) } // редактирования заметки
         }
     }

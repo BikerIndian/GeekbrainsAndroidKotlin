@@ -11,10 +11,8 @@ import ru.geekbrains.AndroidKotlin.R
 @Parcelize
 data class Note(
         val id: Long = noteId,
-        val groupName: String = "",
         val title: String = "",
         val note: String = "",
-        val url: String = "",
         val color: Color = getRandomColor(),
 ) : Parcelable
 

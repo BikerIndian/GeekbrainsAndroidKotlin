@@ -40,10 +40,6 @@ class FireBaseDb : RemoteDataProvider {
         return result
     }
 
-    override fun selectById(id: String): LiveData<ResultFireBaseDb> {
-        TODO("Not yet implemented")
-    }
-
     override fun insert(note: Note): LiveData<ResultFireBaseDb> {
         return update(note)
     }

@@ -1,5 +1,6 @@
 package ru.geekbrains.AndroidKotlin.presentation.main
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -22,14 +23,13 @@ class MainViewModel : ViewModel() {
                     viewStateLiveData.value = MainViewState.Value(notes = t.data as List<Note>)
                 }
                 is ResultFireBaseDb.Error -> {
-                    //  viewStateLiveData.value = MainViewState(error = t.error)
+                    viewStateLiveData.value = MainViewState.Error(error = t.error)
                 }
             }
         }
     }
 
     init {
-        // viewStateLiveData.value = MainViewState.Value(NotesRepositoryImpl.getAllNotes())
         // подписываемся на LiveData
         repositoryNotes.observeForever(notesObserver)
     }

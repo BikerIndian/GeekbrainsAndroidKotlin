@@ -2,6 +2,7 @@ package ru.geekbrains.AndroidKotlin.ui.main
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -32,13 +33,19 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
         mainRecycler.adapter = adapter
 
-        // build add jvmTarget = '1.8'
         viewModel.viewState().observe(viewLifecycleOwner) {
             when (it) {
                 is MainViewState.Value -> {
                     adapter.notes = it.notes
                 }
                 MainViewState.EMPTY -> Unit
+
+                is MainViewState.Error -> {
+                    if (it.error != null) {
+                        Toast.makeText(requireContext(), "Error: "+it.error.message, Toast.LENGTH_LONG).show()
+                    }
+
+                }
             }
         }
 
