@@ -25,11 +25,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         // отправка адаптеру ClickListener для редактирования заметки
-        val  adapter = MainAdapter( object : MainAdapter.OnItemClickListener {
-            override fun onItemClick (note: Note ) {
-                navigateToNote(note)
-            }
-        })
+        val  adapter = MainAdapter { note -> navigateToNote(note) }
 
         mainRecycler.adapter = adapter
 

@@ -18,7 +18,6 @@ class MainAdapter(private val onItemClickListener: OnItemClickListener) : Recycl
             notifyDataSetChanged()
         }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             NoteViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,16 +37,13 @@ class MainAdapter(private val onItemClickListener: OnItemClickListener) : Recycl
             itemView.titleId.text = note.title
             itemView.bodyId.text = note.note
             itemView.note_layoutId.background.setTint(note.color.mapToColor(itemView.context))
-            //itemView.note_layoutId.backgroundTintList(ContextCompat.getColorStateList(itemView.context, note.color.mapToColor(itemView.context)));
-            //itemView.note_layoutId.backgroundTintList(note.color.mapToColor(itemView.context))
             itemView.setOnClickListener { onItemClickListener.onItemClick(note) } // редактирования заметки
         }
     }
 
-    interface OnItemClickListener {
+    fun interface OnItemClickListener {
         fun onItemClick(note: Note)
     }
-
 
 }
 
