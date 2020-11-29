@@ -56,6 +56,7 @@ dependencies {
     //Firebase Firestore
     implementation 'com.google.firebase:firebase-core:18.0.0'
     implementation 'com.google.firebase:firebase-firestore:22.0.0'
+    implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
 
     // поддержка MultiDex для решения проблемы с превышением лимита
     // количества методов для .dex -файлов. Чтобы
