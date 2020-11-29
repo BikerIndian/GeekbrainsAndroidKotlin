@@ -1,5 +1,7 @@
 package ru.geekbrains.AndroidKotlin.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -18,5 +20,9 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container_view, fragment)
                 .addToBackStack("notes")
                 .commit()
+    }
+
+    companion object {
+        fun getStartIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }
