@@ -3,4 +3,6 @@
 
     <string name="title">Заголовок</string>
     <string name="body">Текст заметки</string>
+
+    <string name="logout_menu_title">Выход</string>
 </resources>
