@@ -55,6 +55,17 @@
             android:paddingTop="@dimen/padding"
             android:paddingEnd="@dimen/padding"
             android:textSize="24sp" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <ru.geekbrains.AndroidKotlin.presentation.main.custom.ColorPickerView
+                android:id="@+id/colorPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize" />
+        </HorizontalScrollView>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -78,4 +89,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_delete"
         tools:src="@drawable/ic_delete" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

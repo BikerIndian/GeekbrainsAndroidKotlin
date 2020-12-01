@@ -60,6 +60,19 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
             viewModel.updateNote(it?.toString() ?: "")
         }
 
+        onCreatedCustom()
+    }
+
+    private fun onCreatedCustom() {
+        togglePalette().let { true }
+    }
+
+    private fun togglePalette() {
+        if (colorPicker.isOpen) {
+            colorPicker.close()
+        } else {
+            colorPicker. open ()
+        }
     }
 
     // Возврат обратно

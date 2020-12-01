@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import com.supercat.notes.data.NotesRepositoryImpl.noteId
 import kotlinx.android.parcel.Parcelize
 import ru.geekbrains.AndroidKotlin.R
+import ru.geekbrains.AndroidKotlin.data.Color.*
 
 // add in gradle -> id 'kotlin-android'
 @Parcelize
@@ -24,25 +25,24 @@ enum class Color {
     BLUE,
     RED,
     VIOLET,
-    PINK
+    PINK;
+
+    fun getColorRes(): Int = when (this) {
+        WHITE -> R.color.color_white
+        VIOLET -> R.color.color_violet
+        YELLOW -> R.color.color_yellow
+        RED -> R.color.color_red
+        PINK -> R.color.color_pink
+        GREEN -> R.color.color_green
+        BLUE -> R.color.color_blue
+    }
 }
 
 fun Color.mapToColor(context: Context): Int {
-
-    val id = when (this) {
-        Color.WHITE -> R.color.color_white
-        Color.YELLOW -> R.color.color_yellow
-        Color.GREEN -> R.color.color_green
-        Color.BLUE -> R.color.color_blue
-        Color.RED -> R.color.color_red
-        Color.VIOLET -> R.color.color_violet
-        Color.PINK -> R.color.color_pink
-    }
-
-    return ContextCompat.getColor(context, id)
+    return ContextCompat.getColor(context, getColorRes())
 }
 
 // Генератор цветов
 fun getRandomColor(): Color {
-    return Color.values()[(0 until Color.values().size - 1).random()]
+    return values()[(0 until values().size - 1).random()]
 }
