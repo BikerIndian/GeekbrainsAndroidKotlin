@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="@dimen/padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -45,15 +45,15 @@
         <EditText
             android:id="@+id/bodyEt"
             android:layout_width="match_parent"
-            android:layout_height="471dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/body"
             android:fontFamily="sans-serif-black"
             android:gravity="top|start"
             android:hint="@string/body"
-            android:paddingStart="15dp"
-            android:paddingTop="15dp"
-            android:paddingEnd="15dp"
+            android:paddingStart="@dimen/padding"
+            android:paddingTop="@dimen/padding"
+            android:paddingEnd="@dimen/padding"
             android:textSize="24sp" />
     </LinearLayout>
 

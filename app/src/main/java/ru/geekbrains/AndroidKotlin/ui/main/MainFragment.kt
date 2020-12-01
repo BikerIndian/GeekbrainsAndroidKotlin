@@ -1,11 +1,13 @@
 package ru.geekbrains.AndroidKotlin.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.main_fragment.*
 import ru.geekbrains.AndroidKotlin.R
 import ru.geekbrains.AndroidKotlin.data.Note
@@ -23,14 +25,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setToolbar()
 
         // отправка адаптеру ClickListener для редактирования заметки
-        val  adapter = MainAdapter( object : MainAdapter.OnItemClickListener {
-            override fun onItemClick (note: Note ) {
-                navigateToNote(note)
-            }
-        })
-
+        val adapter = MainAdapter { note -> navigateToNote(note) }
         mainRecycler.adapter = adapter
 
         viewModel.viewState().observe(viewLifecycleOwner) {
@@ -42,9 +40,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
                 is MainViewState.Error -> {
                     if (it.error != null) {
-                        Toast.makeText(requireContext(), "Error: "+it.error.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "Error: ${it.error.message}" , Toast.LENGTH_LONG).show()
                     }
-
                 }
             }
         }
@@ -53,6 +50,26 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         fab.setOnClickListener {
             navigateToCreation()
         }
+    }
+
+    private fun setToolbar() {
+        toolbar.inflateMenu(R.menu.menu_toolbar)
+        toolbar.setOnMenuItemClickListener {
+
+            if (it.itemId == R.id.logout) {
+                logOut()
+                true
+            }
+            false
+        }
+    }
+
+    private fun logOut() {
+        AuthUI.getInstance()
+                .signOut(this.requireContext())
+                .addOnCompleteListener {
+                    startActivity(Intent(this.requireContext(), SplashActivity::class.java))
+                }
     }
 
     // Переход на фрагмент редактирования и передачей данных

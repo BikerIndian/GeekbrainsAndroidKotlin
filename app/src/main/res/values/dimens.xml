@@ -6,4 +6,7 @@
 
     <dimen name="note_item_margin">@dimen/little</dimen>
     <dimen name="note_text_margin">@dimen/medium</dimen>
+
+    <dimen name="padding">16dp</dimen>
+
 </resources>
