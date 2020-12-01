@@ -40,7 +40,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
                 is MainViewState.Error -> {
                     if (it.error != null) {
-                        Toast.makeText(requireContext(), "Error: " + it.error.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "Error: ${it.error.message}" , Toast.LENGTH_LONG).show()
                     }
                 }
             }
