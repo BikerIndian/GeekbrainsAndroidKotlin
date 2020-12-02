@@ -1,5 +1,6 @@
 package ru.geekbrains.AndroidKotlin.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -8,7 +9,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_add_note.*
 import ru.geekbrains.AndroidKotlin.R
+import ru.geekbrains.AndroidKotlin.data.Color
 import ru.geekbrains.AndroidKotlin.data.Note
+import ru.geekbrains.AndroidKotlin.data.mapToColor
 import ru.geekbrains.AndroidKotlin.presentation.main.NoteViewModel
 
 class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
@@ -65,6 +68,10 @@ class AddNoteFragment : Fragment(R.layout.fragment_add_note) {
 
     private fun onCreatedCustom() {
         togglePalette().let { true }
+        colorPicker.onColorClickListener = {
+           viewModel.setColor(it)
+            context?.let { cont -> bodyEt.background.setTint(it.mapToColor(cont)) }
+        }
     }
 
     private fun togglePalette() {
