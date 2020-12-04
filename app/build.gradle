@@ -70,6 +70,14 @@ dependencies {
     // Anko
     implementation "org.jetbrains.anko:anko-commons:0.10.8"
 
+    // DI
+    def koin_ver = '2.1.6'
+    implementation "org.koin:koin-core:$koin_ver"
+    implementation "org.koin:koin-core-ext:$koin_ver"
+    implementation "org.koin:koin-android:$koin_ver"
+    implementation "org.koin:koin-androidx-scope:$koin_ver"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_ver"
+
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

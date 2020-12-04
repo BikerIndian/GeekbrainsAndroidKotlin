@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.main_fragment.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.geekbrains.AndroidKotlin.R
 import ru.geekbrains.AndroidKotlin.data.Note
 import ru.geekbrains.AndroidKotlin.presentation.main.MainViewModel
@@ -17,11 +17,7 @@ import ru.geekbrains.AndroidKotlin.presentation.main.MainViewState
 class MainFragment : Fragment(R.layout.main_fragment) {
 
     // Подключаем  ViewModel
-    private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProvider(this).get(
-                MainViewModel::class.java
-        )
-    }
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

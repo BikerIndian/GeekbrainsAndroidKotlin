@@ -3,10 +3,12 @@ package ru.geekbrains.AndroidKotlin.data
 import android.content.Context
 import android.os.Parcelable
 import androidx.core.content.ContextCompat
-import com.supercat.notes.data.NotesRepositoryImpl.noteId
 import kotlinx.android.parcel.Parcelize
 import ru.geekbrains.AndroidKotlin.R
 import ru.geekbrains.AndroidKotlin.data.Color.*
+
+// Генератор id
+val noteId: Long get() = (0 until Long.MAX_VALUE).random().toLong()
 
 // add in gradle -> id 'kotlin-android'
 @Parcelize

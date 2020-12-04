@@ -1,11 +1,11 @@
 package ru.geekbrains.AndroidKotlin.presentation.main
 
 import androidx.lifecycle.ViewModel
-import com.supercat.notes.data.NotesRepositoryImpl
 import ru.geekbrains.AndroidKotlin.data.Color
 import ru.geekbrains.AndroidKotlin.data.Note
+import ru.geekbrains.AndroidKotlin.data.db.RemoteDataProvider
 
-class NoteViewModel(var note: Note?) : ViewModel() {
+class NoteViewModel(var note: Note?, var remoteDataProvider : RemoteDataProvider) : ViewModel() {
 
     fun updateNote(text: String) {
         note = (note ?: generateNote()).copy(note = text)
@@ -26,14 +26,14 @@ class NoteViewModel(var note: Note?) : ViewModel() {
     // обновить / изменить заметку
     fun update(){
         note?.let {
-            NotesRepositoryImpl.update(it)
+            remoteDataProvider.update(it)
         }
     }
 
     // удалить заметку
     fun delete(){
         note?.let {
-            NotesRepositoryImpl.delete(it)
+            remoteDataProvider.delete(it)
         }
     }
 }
