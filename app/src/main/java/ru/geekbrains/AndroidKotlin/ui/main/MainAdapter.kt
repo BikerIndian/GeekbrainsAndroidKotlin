@@ -1,14 +1,11 @@
 package ru.geekbrains.AndroidKotlin.ui.main
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import ru.geekbrains.AndroidKotlin.R
 import ru.geekbrains.AndroidKotlin.data.Note
-import kotlinx.android.synthetic.main.item_note.view.*
 import ru.geekbrains.AndroidKotlin.data.mapToColor
+import ru.geekbrains.AndroidKotlin.databinding.ItemNoteBinding
 
 // RecyclerView
 class MainAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MainAdapter.NoteViewHolder>() {
@@ -18,34 +15,41 @@ class MainAdapter(private val onItemClickListener: OnItemClickListener) : Recycl
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            NoteViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_note, parent, false)
-        return NoteViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
+        return NoteViewHolder(parent)
     }
 
     override fun getItemCount() = notes.size
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int): Unit {
-
         holder.bind(notes[position])
     }
 
-    inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(note: Note) {
+    inner class NoteViewHolder(
+            parent: ViewGroup,
+            private val binding: ItemNoteBinding = ItemNoteBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false,
+            )
+    ) : RecyclerView.ViewHolder(
+            binding.root
+    ) {
 
-            itemView.titleId.text = note.title
-            itemView.bodyId.text = note.note
-            itemView.note_layoutId.background.setTint(note.color.mapToColor(itemView.context))
-            itemView.setOnClickListener { onItemClickListener.onItemClick(note) } // редактирования заметки
+        fun bind(note: Note) {
+            with(binding) {
+                titleId.text = note.title
+                bodyId.text = note.note
+                noteLayoutId.background.setTint(note.color.mapToColor(itemView.context))
+                root.setOnClickListener { onItemClickListener.onItemClick(note) } // редактирования заметки
+            }
         }
     }
-
-    fun interface OnItemClickListener {
-        fun onItemClick(note: Note)
-    }
-
 }
+
+fun interface OnItemClickListener {
+    fun onItemClick(note: Note)
+}
+
 
 
 

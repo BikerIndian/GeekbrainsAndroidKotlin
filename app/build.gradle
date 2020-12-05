@@ -4,6 +4,10 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
+androidExtensions {
+    experimental = true
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -35,6 +39,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -62,6 +70,17 @@ dependencies {
     // поддержка MultiDex для решения проблемы с превышением лимита
     // количества методов для .dex -файлов. Чтобы
     implementation 'com.android.support:multidex:1.0.3'
+
+    // Anko
+    implementation "org.jetbrains.anko:anko-commons:0.10.8"
+
+    // DI
+    def koin_ver = '2.1.6'
+    implementation "org.koin:koin-core:$koin_ver"
+    implementation "org.koin:koin-core-ext:$koin_ver"
+    implementation "org.koin:koin-android:$koin_ver"
+    implementation "org.koin:koin-androidx-scope:$koin_ver"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_ver"
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'

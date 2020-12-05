@@ -1,12 +1,8 @@
-package com.supercat.notes.data
+package ru.geekbrains.AndroidKotlin.data
 
-import android.util.Log
-import ru.geekbrains.AndroidKotlin.data.Color
-import ru.geekbrains.AndroidKotlin.data.Note
-import ru.geekbrains.AndroidKotlin.data.NotesRepository
 import ru.geekbrains.AndroidKotlin.data.db.FireBaseDb
 
-object NotesRepositoryImpl : NotesRepository {
+class NotesRepositoryImpl : NotesRepository {
 
     // Генератор id
     val noteId: Long get() = (0 until Long.MAX_VALUE).random().toLong()
