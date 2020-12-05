@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import ru.geekbrains.AndroidKotlin.data.Note
+import ru.geekbrains.AndroidKotlin.data.NotesResult
 import ru.geekbrains.AndroidKotlin.errors.NoAuthException
 import ru.geekbrains.AndroidKotlin.model.User
 
@@ -17,45 +18,46 @@ const val TAG = "FireStoreDatabase" // Тэг для Log
 class FireBaseDb : RemoteDataProvider {
 
     private val db = FirebaseFirestore.getInstance()
-   // private val notesReference = getUserNotesCollection()
+    // private val notesReference = getUserNotesCollection()
 
     private val currentUser: FirebaseUser?
         get() = FirebaseAuth.getInstance().currentUser
 
-    override fun selectAll(): LiveData<ResultFireBaseDb> =
-            MutableLiveData<ResultFireBaseDb>().apply {
+    override fun selectAll(): LiveData<NotesResult> =
+            MutableLiveData<NotesResult>().apply {
                 getUserNotesCollection().addSnapshotListener { snapshot, e ->
-                    value = e?.let { ResultFireBaseDb.Error(it) }
+                    value = e?.let { NotesResult.Error(it) }
                             ?: snapshot?.let {
                                 val notes = it.documents.map {
-                                    it.toObject(Note:: class . java ) }
-                                ResultFireBaseDb.Success(notes)
+                                    it.toObject(Note::class.java)
+                                }
+                                NotesResult.Success(notes)
                             }
                 }
             }
 
-    override fun insert(note: Note): LiveData<ResultFireBaseDb> {
+    override fun insert(note: Note): LiveData<NotesResult> {
         return update(note)
     }
 
-    override fun update (note: Note ): LiveData<ResultFireBaseDb> =
-            MutableLiveData<ResultFireBaseDb>().apply {
+    override fun update(note: Note): LiveData<NotesResult> =
+            MutableLiveData<NotesResult>().apply {
                 getUserNotesCollection().document(note.id.toString())
-                        .set (note).addOnSuccessListener {
+                        .set(note).addOnSuccessListener {
                             Log.d(TAG, "update: $note")
-                            value = ResultFireBaseDb.Success(note)
+                            value = NotesResult.Success(note)
                         }.addOnFailureListener {
                             Log.d(TAG, "update error: $note , message: ${it.message} ")
-                            value = ResultFireBaseDb.Error(it)
+                            value = NotesResult.Error(it)
                         }
             }
 
-    override fun delete (note: Note ): LiveData<ResultFireBaseDb> =
-            MutableLiveData<ResultFireBaseDb>().apply {
+    override fun delete(note: Note): LiveData<NotesResult> =
+            MutableLiveData<NotesResult>().apply {
                 getUserNotesCollection().document(note.id.toString())
                         .delete().addOnFailureListener {
                             Log.d(TAG, "delete error: $note , message: ${it.message} ")
-                            value = ResultFireBaseDb.Error(it)
+                            value = NotesResult.Error(it)
                         }
             }
 
@@ -66,4 +68,5 @@ class FireBaseDb : RemoteDataProvider {
     } ?: throw NoAuthException()
 
 }
+
 val notesRepository: RemoteDataProvider by lazy { FireBaseDb() }

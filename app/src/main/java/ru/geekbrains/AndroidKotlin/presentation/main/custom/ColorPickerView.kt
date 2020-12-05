@@ -84,6 +84,11 @@ class ColorPickerView : LinearLayout {
         }
     }
 
+    override fun onDetachedFromWindow() {
+       // останавливать все аниматоры
+        ValueAnimator()?.cancel()
+        super.onDetachedFromWindow()
+    }
     fun open() {
         animator.cancel()
         animator.setValues(PropertyValuesHolder.ofInt(HEIGHT, measuredHeight, desiredHeight),

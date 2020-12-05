@@ -54,9 +54,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
             if (it.itemId == R.id.logout) {
                 logOut()
-                true
+                return@setOnMenuItemClickListener true
             }
-            false
+            return@setOnMenuItemClickListener false
         }
     }
 

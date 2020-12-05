@@ -9,6 +9,7 @@ import org.koin.dsl.module
 
 import ru.geekbrains.AndroidKotlin.data.Note
 import ru.geekbrains.AndroidKotlin.data.NotesRepository
+import ru.geekbrains.AndroidKotlin.data.NotesRepositoryImpl
 import ru.geekbrains.AndroidKotlin.data.db.FireBaseDb
 import ru.geekbrains.AndroidKotlin.data.db.RemoteDataProvider
 import ru.geekbrains.AndroidKotlin.presentation.main.MainViewModel
@@ -19,12 +20,13 @@ object DependencyGraph {
     private val repositoryModule by lazy {
         module {
             single { FireBaseDb() } bind RemoteDataProvider::class
+            single { NotesRepositoryImpl(get()) } bind NotesRepository::class
         }
     }
 
     private val viewModelModule by lazy {
         module {
-            viewModel { MainViewModel() }
+            viewModel { MainViewModel(get()) }
             viewModel { SplashViewModel(get()) }
             viewModel { (note: Note?) -> NoteViewModel(note,get()) }
         }
