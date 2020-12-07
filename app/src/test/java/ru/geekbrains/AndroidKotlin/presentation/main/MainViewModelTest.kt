@@ -52,4 +52,11 @@ class MainViewModelTest {
 
         }
     }
+
+    // Проверка отписки
+    @Test
+    fun `should remove observer`() {
+        viewModel.onCleared()
+        Assert.assertFalse(notesLiveData.hasObservers())
+    }
 }
