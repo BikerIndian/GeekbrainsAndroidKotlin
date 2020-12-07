@@ -15,24 +15,25 @@ private const val NOTES_COLLECTION = "notes" // Ключ коллекции
 private const val USERS_COLLECTION = "users" // Ключ для коллекции пользователей
 const val TAG = "FireStoreDatabase" // Тэг для Log
 
-class FireBaseDb : RemoteDataProvider {
-
-    private val db = FirebaseFirestore.getInstance()
-    // private val notesReference = getUserNotesCollection()
+class FireBaseDb(private val db: FirebaseFirestore, private val auth: FirebaseAuth) : RemoteDataProvider {
 
     private val currentUser: FirebaseUser?
-        get() = FirebaseAuth.getInstance().currentUser
+        get() = auth.currentUser
 
     override fun selectAll(): LiveData<NotesResult> =
             MutableLiveData<NotesResult>().apply {
-                getUserNotesCollection().addSnapshotListener { snapshot, e ->
-                    value = e?.let { NotesResult.Error(it) }
-                            ?: snapshot?.let {
-                                val notes = it.documents.map {
-                                    it.toObject(Note::class.java)
+                try {
+                    getUserNotesCollection().addSnapshotListener { snapshot, e ->
+                        value = e?.let { NotesResult.Error(it) }
+                                ?: snapshot?.let {
+                                    val notes = it.documents.map {
+                                        it.toObject(Note::class.java)
+                                    }
+                                    NotesResult.Success(notes)
                                 }
-                                NotesResult.Success(notes)
-                            }
+                    }
+                } catch (e: Throwable) {
+                    value = NotesResult.Error(e)
                 }
             }
 
@@ -68,5 +69,3 @@ class FireBaseDb : RemoteDataProvider {
     } ?: throw NoAuthException()
 
 }
-
-val notesRepository: RemoteDataProvider by lazy { FireBaseDb() }

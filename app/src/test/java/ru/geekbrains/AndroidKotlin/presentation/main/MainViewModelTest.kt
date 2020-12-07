@@ -38,19 +38,9 @@ class MainViewModelTest {
         var result: Throwable? = null
         val error = Throwable("error")
 
-        viewModel.viewState().observeForever {
-            when (it) {
-                is MainViewState.Value -> Unit
-                MainViewState.EMPTY -> Unit
-                is MainViewState.Error -> if (it.error != null) {
-                    result = it.error
-                }
-            }
-
-            notesLiveData.value = NotesResult.Error(error);
-            Assert.assertEquals(result, error)
-
-        }
+        viewModel.viewState().observeForever {result = (it as? MainViewState.Error)?.error }
+        notesLiveData.value = NotesResult.Error(error);
+        Assert.assertEquals(result, error)
     }
 
     // Проверка отписки
