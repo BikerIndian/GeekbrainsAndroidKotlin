@@ -1,28 +1,28 @@
 package ru.geekbrains.AndroidKotlin.presentation.main
 
-import android.widget.Toast
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import ru.geekbrains.AndroidKotlin.data.Note
-import ru.geekbrains.AndroidKotlin.data.db.FireBaseDb
-import ru.geekbrains.AndroidKotlin.data.db.ResultFireBaseDb
+import ru.geekbrains.AndroidKotlin.data.NotesRepository
+import ru.geekbrains.AndroidKotlin.data.NotesResult
 
-class MainViewModel : ViewModel() {
+class MainViewModel(repository : NotesRepository) : ViewModel(){
     private val viewStateLiveData: MutableLiveData<MainViewState> =
             MutableLiveData()
-    private val repositoryNotes = FireBaseDb().selectAll()
+    private val repositoryNotes = repository.selectAll()
 
-    private val notesObserver = object : Observer<ResultFireBaseDb> {
+    private val notesObserver = object : Observer<NotesResult> {
         // Стандартный обсервер LiveData
-        override fun onChanged(t: ResultFireBaseDb?) {
+        override fun onChanged(t: NotesResult?) {
             if (t == null) return
             when (t) {
-                is ResultFireBaseDb.Success<*> -> {
+                is NotesResult.Success<*> -> {
                     viewStateLiveData.value = MainViewState.Value(notes = t.data as List<Note>)
                 }
-                is ResultFireBaseDb.Error -> {
+                is NotesResult.Error -> {
                     viewStateLiveData.value = MainViewState.Error(error = t.error)
                 }
             }
@@ -36,7 +36,8 @@ class MainViewModel : ViewModel() {
 
     fun viewState(): LiveData<MainViewState> = viewStateLiveData
 
-    override fun onCleared() {
+    @VisibleForTesting
+    public override fun onCleared() {
         // отписка от LiveData
         repositoryNotes.removeObserver(notesObserver)
     }

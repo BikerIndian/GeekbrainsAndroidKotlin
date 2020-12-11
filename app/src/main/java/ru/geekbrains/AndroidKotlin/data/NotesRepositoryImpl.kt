@@ -1,27 +1,32 @@
 package ru.geekbrains.AndroidKotlin.data
 
-import ru.geekbrains.AndroidKotlin.data.db.FireBaseDb
+import androidx.lifecycle.LiveData
+import ru.geekbrains.AndroidKotlin.data.db.RemoteDataProvider
+import ru.geekbrains.AndroidKotlin.model.User
 
-class NotesRepositoryImpl : NotesRepository {
+class NotesRepositoryImpl(val remoteProvider : RemoteDataProvider) : NotesRepository {
 
     // Генератор id
     val noteId: Long get() = (0 until Long.MAX_VALUE).random().toLong()
-    val fireBaseDb =  FireBaseDb()
     private val notes: MutableList<Note> = mutableListOf()
 
-    override fun getAllNotes(): List<Note> {
-        return notes
+    override fun selectAll(): LiveData<NotesResult> {
+        return remoteProvider.selectAll()
+    }
+
+    override fun getCurrentUser(): User? {
+        return remoteProvider.getCurrentUser()
     }
 
     override fun insert(note: Note) {
-        fireBaseDb.insert(note)
+        remoteProvider.insert(note)
     }
 
     override fun update(newNote: Note) {
-        fireBaseDb.update(newNote)
+        remoteProvider.update(newNote)
     }
 
     override fun delete(note: Note) {
-        fireBaseDb.delete(note)
+        remoteProvider.delete(note)
     }
 }
