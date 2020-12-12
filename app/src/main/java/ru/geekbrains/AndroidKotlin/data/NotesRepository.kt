@@ -1,12 +1,13 @@
 package ru.geekbrains.AndroidKotlin.data
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.channels.ReceiveChannel
 import ru.geekbrains.AndroidKotlin.model.User
 
 interface NotesRepository {
-    fun selectAll(): LiveData<NotesResult>
+    fun selectAll(): ReceiveChannel<NotesResult>
     fun getCurrentUser (): User?
-    fun insert(note: Note)
-    fun update(note: Note)
-    fun delete(note: Note)
+    suspend fun insert(note: Note)
+    suspend fun update(note: Note)
+    suspend fun delete(note: Note)
 }

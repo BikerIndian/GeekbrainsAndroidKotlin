@@ -29,17 +29,8 @@ class MainViewModel(repository : NotesRepository) : ViewModel(){
         }
     }
 
-    init {
-        // подписываемся на LiveData
-        repositoryNotes.observeForever(notesObserver)
-    }
 
     fun viewState(): LiveData<MainViewState> = viewStateLiveData
 
-    @VisibleForTesting
-    public override fun onCleared() {
-        // отписка от LiveData
-        repositoryNotes.removeObserver(notesObserver)
-    }
 }
 
