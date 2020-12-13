@@ -1,11 +1,16 @@
 package ru.geekbrains.AndroidKotlin.presentation.main
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ru.geekbrains.AndroidKotlin.data.Color
 import ru.geekbrains.AndroidKotlin.data.Note
 import ru.geekbrains.AndroidKotlin.data.NotesRepository
 
 class NoteViewModel(var note: Note?, var repository : NotesRepository) : ViewModel() {
+
+    private val showErrorLiveData = MutableLiveData<Boolean>()
 
     fun updateNote(text: String) {
         note = (note ?: generateNote()).copy(note = text)
@@ -25,15 +30,26 @@ class NoteViewModel(var note: Note?, var repository : NotesRepository) : ViewMod
 
     // обновить / изменить заметку
     fun update(){
-        note?.let {
-            repository.update(it)
+        viewModelScope.launch {
+            val noteValue = note ?: return@launch
+            try {
+            repository.update(noteValue)
+            } catch (th: Throwable) {
+                showErrorLiveData.value = true
+            }
         }
     }
 
     // удалить заметку
     fun delete(){
-        note?.let {
-            repository.delete(it)
+        viewModelScope.launch {
+            val noteValue = note ?: return@launch
+
+            try {
+            repository.delete(noteValue)
+            } catch (th: Throwable) {
+                showErrorLiveData.value = true
+            }
         }
     }
 }
