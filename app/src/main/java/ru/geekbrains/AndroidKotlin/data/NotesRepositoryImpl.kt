@@ -1,6 +1,7 @@
 package ru.geekbrains.AndroidKotlin.data
 
 import androidx.lifecycle.LiveData
+import kotlinx.coroutines.channels.ReceiveChannel
 import ru.geekbrains.AndroidKotlin.data.db.RemoteDataProvider
 import ru.geekbrains.AndroidKotlin.model.User
 
@@ -10,7 +11,7 @@ class NotesRepositoryImpl(val remoteProvider : RemoteDataProvider) : NotesReposi
     val noteId: Long get() = (0 until Long.MAX_VALUE).random().toLong()
     private val notes: MutableList<Note> = mutableListOf()
 
-    override fun selectAll(): LiveData<NotesResult> {
+    override fun selectAll(): ReceiveChannel<NotesResult> {
         return remoteProvider.selectAll()
     }
 
@@ -18,15 +19,15 @@ class NotesRepositoryImpl(val remoteProvider : RemoteDataProvider) : NotesReposi
         return remoteProvider.getCurrentUser()
     }
 
-    override fun insert(note: Note) {
+    override suspend fun insert(note: Note) {
         remoteProvider.insert(note)
     }
 
-    override fun update(newNote: Note) {
+    override suspend fun update(newNote: Note) {
         remoteProvider.update(newNote)
     }
 
-    override fun delete(note: Note) {
+    override suspend fun delete(note: Note) {
         remoteProvider.delete(note)
     }
 }
